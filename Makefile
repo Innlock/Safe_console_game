@@ -20,11 +20,13 @@ win:
 # запуск полученного исполняемого файла
 	./$(WIN)/safe.exe
 
+
 lin:
 	mkdir $(LIN)
 	pip3 install pyinstaller
 	pyinstaller $(LIN_EXE)
 	./$(LIN)/safe.exe
+
 
 web:
 #  запускает командную оболочку Windows с параметром /c (выполнение одной команды) -> открывает веб-страницу по адресу
@@ -32,9 +34,11 @@ web:
 # запускает веб-сервер на порту 8080
 	python -m http.server 8080
 
-clean win:
+
+clean_win:
 # рекурсивно и принудительно удалять все файлы и поддиректории, находящиеся в директории
 	rd /s /q $(WIN)
 
-clean lin:
+
+clean_lin:
 	rm -rf $(LIN)
