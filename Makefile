@@ -9,7 +9,7 @@ LIN = lin
 # specpath - где будет создан файл спецификации 
 # clean - PyInstaller очистит временные файлы и каталоги после создания исполняемого файла
 WIN_EXE = --onefile $(SCRIPT) --distpath $(WIN) --workpath $(WIN) --specpath $(WIN) --clean
-LIN_EXE = --onefile $(SCRIPT) --distpath $(LIN) --workpath $(LIN) --specpath $(LIN) --clean
+LIN_EXE = --onefile $(SCRIPT) --distpath $(LIN) --workpath $(LIN)/safe --specpath $(LIN) --clean
 
 # all: win lin
 
@@ -22,7 +22,7 @@ win:
 
 
 lin:
-	mkdir $(LIN)
+	mkdir -p $(LIN)/safe
 	pip3 install pyinstaller
 	pyinstaller $(LIN_EXE)
 	./$(LIN)/safe.exe
