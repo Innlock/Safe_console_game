@@ -42,3 +42,7 @@ clean_win:
 
 clean_lin:
 	rm -rf $(LIN)
+
+
+test:
+	python test.py

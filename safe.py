@@ -65,22 +65,22 @@ async def initialize():
 
 async def rules():
     write("")
-    write("YOU ARE A BURGLAR AND HAVE ENCOUNTERED A SAFE. YOU MUST")
-    write("OPEN THE SAFE TO GET THE SECRET PLANS THAT YOU CAME FOR.")
-    write("TO DO THIS, YOU MUST ENTER THE NUMBER OF WHAT YOU WANT THE")
-    write("DIAL TURNED TO. THE COMPUTER WILL ACT AS THE SAFE AND WILL")
-    write("HELP YOU BY GIVING A SORT OF CLUE. YOU WILL 'HEAR' A CLICK")
-    write("AT EVENLY SPACED NOTCHES AS YOU MOVE TO THE PROPER NUMBER.")
-    write("THERE ARE FOUR OF THEM BEFORE THE FINAL CLICK IS 'HEARD'.")
-    write("AFTER THE FINAL ONE IS HEARD, YOU WILL GO ON TO THE NEXT NUMBER.")
-    write("THE COMPUTER WILL 'SAY' 'CLICK' FOR EACH NOTCH THAT YOU PASS")
-    write("AND '**CLICK**' WHEN YOU REACH THE PROPER NUMBER.")
-    write("IF YOU PASS IT OR TAKE LONGER THAN TEN TRIES ON ANY ONE NUMBER,")
-    write("YOU WILL ACTIVATE THE ALARM.")
-    write("REMEMBER THAT WHEN YOU TURN THE DIAL TO THE LEFT, THE NUMBERS")
-    write("GO FROM 1 - 99, AND WHEN YOU GO TO THE RIGHT, THE NUMBERS GO")
-    write("FROM 99 - 1")
     write("")
+    write("YOU ARE A BURGULAR AND HAVE ENCOUNTERED A SAFE.  YOU  MUST")
+    write("OPEN THE SAFE TO GET THE SECRET PLANS THAT YOU CAME FOR.")
+    write("TO DO THIS , YOU MUST ENTER THE NUMBER OF WHAT YOU WANT THE")
+    write(" DIAL TURNED TO, THE COMPUTER WILL ACT AS THE SAFE AND WILL")
+    write("HELP YOU BY GIVING A SORT OF CLUE, THAT IS YOU WILL'HEAR'")
+    write("A CLICK AT EVENLY SPACED NOTCHES AS YOU MOVE TO THE PROPER")
+    write("NUMBER.  THERE ARE FOUR OF THEM BEFORE THE FINAL CLICK IS")
+    write("'HEARD'. AFTER THE FINAL ONE IS HEARD, YOU WILL GO ON TO")
+    write("THE NEXT NUMBER. THE COMPUTER WILL'SAY' 'CLICK' FOR EACH")
+    write("NOTCH THAT YOU PASS AND '**CLICK**' WHEN YOU REACH THE")
+    write("PROPER NUMBER.  IF YOU PASS IT OR TAKE LONGER THAN TEN TRIES")
+    write("ON ANY ONE NUMBER, YOU WILL ACTIVATE THE ALARM.")
+    write("REMEMBER THAT WHEN YOU TURN THE DIAL TO THE LEFT, THE")
+    write("NUMBERS GO FROM 1 -99 ,AND WHEN YOU GO TO THE RIGHT, THE")
+    write("NUMBERS GO FROM 99-1")
 
 
 async def defeat():
@@ -120,7 +120,7 @@ async def game_loop(retry, numbers, A1):
 
 async def start_game(numbers, A1):
     A, B, C = numbers
-    write("OKAY, START TO THE RIGHT, SHHHHHH!!!!!!!!!!!!!!")
+    write("OKAY, START TO THE RIGHT,  SHHHHHH!!!!!!!!!!!!!!")
 
     write("ARE YOU READY?", end=" ")
     input_value = await read()
@@ -136,7 +136,12 @@ async def start_game(numbers, A1):
     J = 1
     write("OKAY, THEN LET'S START")
     while True:
-        M = int(await read())
+        write("? ", end="")
+        M = await read()
+        if not M.isdigit():
+            write("NUMBER EXPECTED - RETRY INPUT LINE")
+            continue    
+        M = int(M)
         if M < A:
             return await defeat()
         elif M > A:
@@ -147,7 +152,7 @@ async def start_game(numbers, A1):
                 return await defeat()
             J += 1
         else:
-            write("**CLICK**")
+            write("** CLICK **")
             break
 
     L = L + B
@@ -158,12 +163,13 @@ async def start_game(numbers, A1):
 
     J = 1
     while True:
+        write("? ", end="")
         M = int(await read())
         if M == A or A > M > B:
             return await defeat()
         if M < A:
             if M == B:
-                write("**CLICK**")
+                write("** CLICK **")
                 break
             else:
                 M += 100
@@ -184,12 +190,13 @@ async def start_game(numbers, A1):
 
     J = 1
     while True:
+        write("? ", end="")
         M = int(await read())
         if M == B or B < M < C:
             return await defeat()
         if M > B:
             if M == C:
-                write("**CLICK**...YOU OPENED IT")
+                write("** CLICK **...YOU OPENED IT")
                 break
         else:
             M += 100
@@ -202,7 +209,7 @@ async def start_game(numbers, A1):
             return await defeat()
         J += 1
 
-    write("BUT OH, OH, HE MUST HAVE MOVED IT")
+    write("BUT OH,OH, HE MUST HAVE MOVED IT")
     write("TRY THE ONE OVER THERE")
     return False
 
